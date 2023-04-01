@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+using System.Linq;
 using Items;
 
 namespace BuilderPattern
@@ -10,11 +11,22 @@ namespace BuilderPattern
         {
             GPU = new();
         }
-        
+
         public abstract void SetSilicon();
         public abstract void SetCoolingSystem(string name);
         public abstract void SetType();
         public abstract void IncludeAdditions(string addition);
+        public GPU GetResult()
+        {
+            var newGPU = new GPU()
+            {
+                GPUSilicon = new() { Name = GPU.GPUSilicon.Name },
+                CoolingSystem = new() { Name = GPU.CoolingSystem.Name },
+                GPUType = new() { Name = GPU.GPUType.Name }
+            };
+            newGPU.Additions = GPU.Additions.ToList();
+            return newGPU;
+        }
     }
 
     public class Nvidia4070TiDesktopGPUBuilder : GPUBuilderClass
@@ -38,7 +50,7 @@ namespace BuilderPattern
         {
             GPU.GPUType = new Items.Type { Name = "Desktop" };
         }
-        
+
     }
 
     public class NvidiaTegraX1GPUBuilder : GPUBuilderClass

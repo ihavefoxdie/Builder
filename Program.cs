@@ -14,11 +14,11 @@ namespace Executor
 
             director.BuildStandardProduct();
 
-            var GPU = director.Builder.GPU;
+            var GPU = director.Builder.GetResult();
             
             director.BuildPremiumProduct();
 
-            var NewGPU = director.Builder.GPU;
+            var NewGPU = director.Builder.GetResult();
             Console.WriteLine();
         }
     }
